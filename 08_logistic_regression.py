@@ -62,8 +62,8 @@ for epoch in range(num_epochs):
         print(f'epoch: {epoch+1}, loss = {loss.item():.4f}')
 
 
-with torch.no_grad():
+with torch.no_grad():   #we use no_grad because no no need of gradient in our computation.
     y_predicted = model(X_test)
-    y_predicted_cls = y_predicted.round()
+    y_predicted_cls = y_predicted.round()   #this .round() somewhere uses gradient....thus using no_grad helps us now
     acc = y_predicted_cls.eq(y_test).sum() / float(y_test.shape[0])
     print(f'accuracy: {acc.item():.4f}')
